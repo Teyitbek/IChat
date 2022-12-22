@@ -58,15 +58,71 @@ class FirestoreService {
         }
     }
     
-    func createWaitingChat(message: String, reseiver: MUser, completion: @escaping (Result<Void, Error>) -> Void) {
+    func createWaitingChatIfNeeded(message: String, reseiver: MUser, completion: @escaping (Result<Void, Error>) -> Void) {
+        let currentActiveRef = db.collection(["users", currentUser.id, "activeChats"].joined(separator: "/"))
+        let currentActiveDocumentRef = currentActiveRef.document(reseiver.id)
+        
+        let receiverActiveRef = db.collection(["users", reseiver.id, "activeChats"].joined(separator: "/"))
+        let receiverActiveDocumentRef = receiverActiveRef.document(currentUser.id)
+        
+        receiverActiveDocumentRef.getDocument { document, error in
+            if let document = document, document.exists {
+                let currentMessage = MMessage(user: reseiver, content: message)
+                let currentActiveMessagesRef = currentActiveDocumentRef.collection("messages")
+                let currentChat = MChat(friendUsername: reseiver.username,
+                                        lastMessageContent: message,
+                                        friendId: reseiver.id)
+                
+                let group = DispatchGroup()
+                
+                group.enter()
+                currentActiveDocumentRef.setData(currentChat.representation) { (error) in
+                    group.leave()
+                }
+                
+                group.enter()
+                currentActiveMessagesRef.addDocument(data: currentMessage.representation) { (error) in
+                    group.leave()
+                }
+                
+                let recieverMessage = MMessage(user: self.currentUser, content: message)
+                let receiverMessagesRef = receiverActiveDocumentRef.collection("messages")
+                let receiverChat = MChat(friendUsername: self.currentUser.username,
+                                         lastMessageContent: message,
+                                         friendId: self.currentUser.id)
+                
+                group.enter()
+                receiverActiveDocumentRef.setData(receiverChat.representation) { (error) in
+                    group.leave()
+                }
+                
+                group.enter()
+                receiverMessagesRef.addDocument(data: recieverMessage.representation) { (error) in
+                    group.leave()
+//                    if let error = error {
+//                        completion(.failure(error))
+//                        return
+//                    }
+                }
+                
+                group.notify(queue: .main) {
+                    completion(.success(Void()))
+                }
+            } else {
+                self.createWaitingChat(message: message, reseiver: reseiver, completion: completion)
+            }
+        }
+    }
+    
+    private func createWaitingChat(message: String, reseiver: MUser, completion: @escaping (Result<Void, Error>) -> Void) {
         let reference = db.collection(["users", reseiver.id, "waitingChats"].joined(separator: "/"))
         let messageRef = reference.document(self.currentUser.id).collection("messages") // Error id
-        
+
         let message = MMessage(user: currentUser, content: message)
         let chat = MChat(friendUsername: currentUser.username,
                          lastMessageContent: message.content,
                          friendId: currentUser.id)
-        
+
         reference.document(currentUser.id).setData(chat.representation) { (error) in
             if let error = error {
                 completion(.failure(error))

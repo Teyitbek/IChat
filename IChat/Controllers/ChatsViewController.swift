@@ -1,14 +1,11 @@
-
 import UIKit
 import MessageKit
 import InputBarAccessoryView
 import FirebaseFirestore
 
 class ChatsViewController: MessagesViewController {
-    
     private var messages: [MMessage] = []
     private var messageListener: ListenerRegistration?
-    
     private let user: MUser
     private let chat: MChat
     

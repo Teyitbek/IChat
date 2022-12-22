@@ -1,18 +1,14 @@
-
-
 import UIKit
 import FirebaseFirestore
 
 class ListViewController: UIViewController {
-    
     var activeChats = [MChat]()
     var waitingChats = [MChat]()
-    
     private var waitingChatsListener: ListenerRegistration?
     private var activeChatsListener: ListenerRegistration?
     
     enum Section: Int, CaseIterable {
-        case  waitingChats, activeChats
+        case waitingChats, activeChats
         
         func description() -> String {
             switch self {
@@ -45,7 +41,6 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupSearchBar()
         setupCollectionView()
         createDataSource()
