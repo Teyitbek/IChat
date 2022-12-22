@@ -5,11 +5,25 @@ import UIKit
 class ChatRequestViewController: UIViewController {
     
     let containerView = UIView()
-    let imageView = UIImageView(image: #imageLiteral(resourceName: "human2"), contentMode: .scaleAspectFill)
-    let nameLabel = UILabel(text: "Peter Ben", font: .systemFont(ofSize: 20, weight: .light))
+    let imageView = UIImageView(image: #imageLiteral(resourceName: "person2"), contentMode: .scaleAspectFill)
+    let nameLabel = UILabel(text: "Teyit", font: .systemFont(ofSize: 20, weight: .light))
     let aboutMeLabel = UILabel(text: "You have the opportunity to start a new chat", font: .systemFont(ofSize: 16, weight: .light))
     let acceptButton = UIButton(title: "ACCEPT", titleColor: .white, backgroundColor: .black, font: .laoSangamMN20(), isShadow: false, cornerRadius: 10)
     let denyButton = UIButton(title: "Deny", titleColor: #colorLiteral(red: 0.8352941176, green: 0.2, blue: 0.2, alpha: 1), backgroundColor: .mainWhite(), font: .laoSangamMN20(), isShadow: false, cornerRadius: 10)
+    
+    weak var delegate: WaitingChatNavigation?
+    
+    private var chat: MChat
+    
+    init(chat: MChat) {
+        self.chat = chat
+        nameLabel.text = chat.friendUsername
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +31,19 @@ class ChatRequestViewController: UIViewController {
         view.backgroundColor = .mainWhite()
         customizeElements()
         setupConstraints()
+        
+        denyButton.addTarget(self, action: #selector(denyButtonTapped), for: .touchUpInside)
+        acceptButton.addTarget(self, action: #selector(acceptButtonTapped), for: .touchUpInside)
+    }
+    @objc private func denyButtonTapped() {
+        self.dismiss(animated: true) {
+            self.delegate?.removeWaitingChat(chat: self.chat)
+        }
+    }
+    @objc private func acceptButtonTapped() {
+        self.dismiss(animated: true) {
+            self.delegate?.chatToActive(chat: self.chat)
+        }
     }
     
     private func customizeElements() {
@@ -28,7 +55,6 @@ class ChatRequestViewController: UIViewController {
         denyButton.layer.borderColor = #colorLiteral(red: 0.8352941176, green: 0.2, blue: 0.2, alpha: 1)
         containerView.backgroundColor = .mainWhite()
         containerView.layer.cornerRadius = 30
-        
     }
     
     override func viewWillLayoutSubviews() {
@@ -45,7 +71,8 @@ extension ChatRequestViewController {
         containerView.addSubview(nameLabel)
         containerView.addSubview(aboutMeLabel)
         
-        let buttonsStackView = UIStackView(arrangedSubviews: [acceptButton, denyButton], axis: .horizontal, spacing: 7)
+        let buttonsStackView = UIStackView(arrangedSubviews: [acceptButton, denyButton],
+                                           axis: .horizontal, spacing: 7)
         buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
         buttonsStackView.distribution = .fillEqually
         containerView.addSubview(buttonsStackView)
@@ -86,6 +113,7 @@ extension ChatRequestViewController {
 }
 
 // MARK: - SwiftUI
+/*
 import SwiftUI
 
 struct ChatRequestVCProvider: PreviewProvider {
@@ -106,3 +134,4 @@ struct ChatRequestVCProvider: PreviewProvider {
         }
     }
 }
+*/

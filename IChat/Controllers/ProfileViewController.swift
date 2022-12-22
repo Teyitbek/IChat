@@ -5,11 +5,26 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     let containerView = UIView()
-    let imageView = UIImageView(image: #imageLiteral(resourceName: "human2"), contentMode: .scaleAspectFill)
-    let nameLabel = UILabel(text: "Peter Ben", font: .systemFont(ofSize: 20, weight: .light))
+//    let imageView = UIImageView(image: #imageLiteral(resourceName: "human2"), contentMode: .scaleAspectFill)
+    let imageView = UIImageView(image: UIImage(named: "person9"), contentMode: .scaleToFill)
+    let nameLabel = UILabel(text: "Name Label", font: .systemFont(ofSize: 20, weight: .light))
     let aboutMeLabel = UILabel(text: "You have the opportunity to chat with the best man in the world!",
                                font: .systemFont(ofSize: 16, weight: .light))
     let myTextField = InsertableTextField()
+    
+    private let user: MUser
+    
+    init(user: MUser) {
+        self.user = user
+        self.nameLabel.text = user.username
+        self.aboutMeLabel.text = user.description
+//        must be image
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +51,18 @@ class ProfileViewController: UIViewController {
     
     @objc private func sendMessage() {
         print(#function)
+        guard let message = myTextField.text, message != "" else { return }
+        self.dismiss(animated: true) {
+            FirestoreService.shared.createWaitingChat(message: message, reseiver: self.user) { (result) in
+                switch result {
+                case .success(): // remove _
+                    UIApplication.getTopViewController()?.showAlert(title: "You send to: \(self.user.username)", and: "Message: \(message)")
+                case .failure(let error):
+                    UIApplication.getTopViewController()?.showAlert(title: "Error!", and: error.localizedDescription)
+                }
+            }
+        }
     }
-    
 }
 
 extension ProfileViewController {
@@ -85,6 +110,7 @@ extension ProfileViewController {
 }
 
 // MARK: - SwiftUI
+/*
 import SwiftUI
 
 struct ProfileVCProvider: PreviewProvider {
@@ -106,3 +132,4 @@ struct ProfileVCProvider: PreviewProvider {
     }
 }
 
+*/

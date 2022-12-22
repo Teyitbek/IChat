@@ -62,6 +62,7 @@ class InsertableTextField: UITextField {
 }
 
 // MARK: - SwiftUI
+/*
 import SwiftUI
 
 struct TextFieldProvider: PreviewProvider {
@@ -82,3 +83,5 @@ struct TextFieldProvider: PreviewProvider {
         }
     }
 }
+
+*/

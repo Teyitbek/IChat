@@ -38,9 +38,11 @@ class SetupProfileViewController: UIViewController {
         view.backgroundColor = .white
         setupConstraints()
         
-        goToChatsButton.addTarget(self, action: #selector(goToChatsButtonTapped),
-                                  for: .touchUpInside)
+        goToChatsButton.addTarget(self, action: #selector(goToChatsButtonTapped), for: .touchUpInside)
     }
+}
+// MARK: Actions
+extension SetupProfileViewController {
     @objc private func goToChatsButtonTapped() {
         guard let email = currentUser.email else { return }
         FirestoreService.shared.saveProfileWith(
@@ -53,7 +55,9 @@ class SetupProfileViewController: UIViewController {
                 switch result {
                 case .success(let muser):
                     self.showAlert(title: "Success!", and: "Start conversation") {
-                        self.present(MainTabBarController(), animated: true)
+                        let mainTabBar = MainTabBarController(currentUser: muser)
+                        mainTabBar.modalPresentationStyle = .fullScreen
+                        self.present(mainTabBar, animated: true)
                     }
                 case .failure(let error):
                     self.showAlert(title: "Error!", and: error.localizedDescription)
@@ -67,22 +71,17 @@ extension SetupProfileViewController {
     private func setupConstraints() {
         let fullNameStackView = UIStackView(
             arrangedSubviews: [fullNameLabel, fullNameTextField],
-            axis: .vertical,
-            spacing: 0)
+            axis: .vertical, spacing: 0)
         let aboutMeStackView = UIStackView(
             arrangedSubviews: [aboutmeLabel, aboutMeTextField],
-            axis: .vertical,
-            spacing: 0)
+            axis: .vertical, spacing: 0)
         let sexStackView = UIStackView(
             arrangedSubviews: [sexLabel, sexSegmentedControl],
-            axis: .vertical,
-            spacing: 10)
+            axis: .vertical, spacing: 10)
         
         goToChatsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        let stackView = UIStackView(arrangedSubviews: [fullNameStackView,
-                                                       aboutMeStackView,
-                                                       sexStackView,
-                                                       goToChatsButton],
+        let stackView = UIStackView(arrangedSubviews: [fullNameStackView, aboutMeStackView,
+                                                       sexStackView, goToChatsButton],
                                     axis: .vertical, spacing: 35)
         
         welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -110,6 +109,15 @@ extension SetupProfileViewController {
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40)
         ])
+    }
+}
+// MARK: - UIImagePickerControllerDelegate
+extension SetupProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        picker.dismiss(animated: true, completion: nil)
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+        fullImageView.circleImageView.image = image
     }
 }
 

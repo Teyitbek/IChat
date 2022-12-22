@@ -30,12 +30,14 @@ class AuthViewController: UIViewController {
         signUpVC.delegate = self
         loginVC.delegate = self
     }
+}
+
+// MARK: Actions
+extension AuthViewController {
     @objc private func emailButtonTapped() {
-        print(#function)
         present(signUpVC, animated: true)
     }
     @objc private func loginButtonTapped() {
-        print(#function)
         present(loginVC, animated: true)
     }
 }
@@ -69,8 +71,8 @@ extension AuthViewController {
         ])
     }
 }
-
-extension AuthViewController: AuthNamvigationDelegate {
+// MARK: AuthNavigation Delegate
+extension AuthViewController: AuthNavigationDelegate {
     func toLoginVC() {
         present(loginVC, animated: true)
     }

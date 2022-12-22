@@ -1,13 +1,7 @@
-
-
 import UIKit
 
-
 class ActiveChatCell: UICollectionViewCell, SelfConfiguringCell {
-    
     static var reuseId: String = "ActiveChatCell"
-    
-    
     let friendImageView = UIImageView()
     let friendName = UILabel(text: "User name", font: .laoSangamMN20())
     let lastMessage = UILabel(text: "How are you?", font: .laoSangamMN18())
@@ -17,16 +11,15 @@ class ActiveChatCell: UICollectionViewCell, SelfConfiguringCell {
         super.init(frame: frame)
         backgroundColor = .white
         setupConstraints()
-        
         self.layer.cornerRadius = 4
         self.clipsToBounds = true
     }
     
     func configure<U>(with value: U) where U : Hashable {
         guard let chat: MChat = value as? MChat else { return }
-        friendImageView.image = UIImage(named: chat.userImageString)
-        friendName.text = chat.username
-        lastMessage.text = chat.lastMessage
+        friendName.text = chat.friendUsername
+        lastMessage.text = chat.lastMessageContent
+        // must be image
     }
     
     required init?(coder: NSCoder) {
@@ -88,7 +81,6 @@ struct ActiveChatProvider: PreviewProvider {
     }
     
     struct ContainerView: UIViewControllerRepresentable {
-        
         let tabBarVC = MainTabBarController()
         
         func makeUIViewController(context: UIViewControllerRepresentableContext<ActiveChatProvider.ContainerView>) -> MainTabBarController {
@@ -96,7 +88,6 @@ struct ActiveChatProvider: PreviewProvider {
         }
         
         func updateUIViewController(_ uiViewController: ActiveChatProvider.ContainerView.UIViewControllerType, context: UIViewControllerRepresentableContext<ActiveChatProvider.ContainerView>) {
-            
         }
     }
 }

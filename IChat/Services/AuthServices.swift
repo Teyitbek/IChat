@@ -9,9 +9,7 @@ class AuthService {
     static let shared = AuthService()
     private let auth = Auth.auth()
     
-    func login(email: String?,
-               password: String?,
-               completion: @escaping (Result<User, Error>) -> Void) {
+    func login(email: String?, password: String?, completion: @escaping (Result<User, Error>) -> Void) {
         
         guard let email = email, let password = password else {
             completion(.failure(AuthError.notFilled))
@@ -27,10 +25,7 @@ class AuthService {
         }
     }
     
-    func register(email: String?,
-                  password: String?,
-                  confirmPassword: String?,
-                  completion: @escaping (Result<User, Error>) -> Void) {
+    func register(email: String?,  password: String?, confirmPassword: String?, completion: @escaping (Result<User, Error>) -> Void) {
         
         guard Validators.isFilled(email: email, password: password, confirmPassword: confirmPassword) else {
             completion(.failure(AuthError.notFilled))

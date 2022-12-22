@@ -2,7 +2,7 @@
 
 import Foundation
 
-protocol AuthNamvigationDelegate: AnyObject {
+protocol AuthNavigationDelegate: AnyObject {
     func toLoginVC()
     func toSignUpVC()
 }

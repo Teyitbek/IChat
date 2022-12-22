@@ -28,7 +28,7 @@ class SignUpViewController: UIViewController {
         return button
     }()
     
-    weak var delegate: AuthNamvigationDelegate?
+    weak var delegate: AuthNavigationDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,11 +65,9 @@ class SignUpViewController: UIViewController {
 // MARK: - Setup constraints
 extension SignUpViewController {
     private func setupConstraints() {
-        let emailStackView = UIStackView(arrangedSubviews: [emailLabel,
-                                                            emailTextField],
+        let emailStackView = UIStackView(arrangedSubviews: [emailLabel, emailTextField],
                                          axis: .vertical, spacing: 0)
-        let passwordStackView = UIStackView(arrangedSubviews: [passwordLabel,
-                                                               passwordTextField],
+        let passwordStackView = UIStackView(arrangedSubviews: [passwordLabel, passwordTextField],
                                             axis: .vertical, spacing: 0)
         let confirmPasswordStackView = UIStackView(arrangedSubviews: [confirmPasswodLabel,
                                                                       confirmPasswordTextField],
@@ -84,11 +82,9 @@ extension SignUpViewController {
         
         
         loginButton.contentHorizontalAlignment = .leading
-        let bottomStackView = UIStackView(arrangedSubviews: [
-            alreadyOnboardLabel,
-            loginButton],
-                                          axis: .horizontal,
-                                          spacing: 10)
+        let bottomStackView = UIStackView(
+            arrangedSubviews: [alreadyOnboardLabel, loginButton],
+            axis: .horizontal, spacing: 10)
         bottomStackView.alignment = .firstBaseline
         
         welcomeLabel.translatesAutoresizingMaskIntoConstraints = false

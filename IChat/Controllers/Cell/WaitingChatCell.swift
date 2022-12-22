@@ -6,6 +6,7 @@ class WaitingChatCell: UICollectionViewCell, SelfConfiguringCell {
     static var reuseId: String = "WaitingChatCell"
     
     let friendImageView = UIImageView()
+    let title = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,18 +19,29 @@ class WaitingChatCell: UICollectionViewCell, SelfConfiguringCell {
     
     func configure<U>(with value: U) where U : Hashable {
         guard let chat: MChat = value as? MChat else { return }
-        friendImageView.image = UIImage(named: chat.userImageString)
+        // must be Image from remote firebase 
+        friendImageView.image = UIImage(named: "person4")
+        title.text = chat.friendUsername
     }
     
     private func setupConstraints() {
         friendImageView.translatesAutoresizingMaskIntoConstraints = false
+        title.translatesAutoresizingMaskIntoConstraints = false
         addSubview(friendImageView)
+        addSubview(title)
         
         NSLayoutConstraint.activate([
             friendImageView.topAnchor.constraint(equalTo: self.topAnchor),
             friendImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             friendImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             friendImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            
+        ])
+        NSLayoutConstraint.activate([
+            title.topAnchor.constraint(equalTo: friendImageView.bottomAnchor, constant: 1),
+            title.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            title.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            title.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
     

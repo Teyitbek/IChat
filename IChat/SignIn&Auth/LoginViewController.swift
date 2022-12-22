@@ -5,8 +5,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    let welcomeLabel = UILabel(text: "Welcome back!",
-                               font: .timeNewRoman30())
+    let welcomeLabel = UILabel(text: "Welcome back!", font: .timeNewRoman30())
     
     let loginWithLabel = UILabel(text: "Login with")
     let emailLabel = UILabel(text: "Email")
@@ -30,7 +29,7 @@ class LoginViewController: UIViewController {
         return button
     }()
     
-    weak var delegate: AuthNamvigationDelegate?
+    weak var delegate: AuthNavigationDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,11 +38,12 @@ class LoginViewController: UIViewController {
         googleButton.customizeGoogleButton()
         setupConstraints()
         
-        loginButton.addTarget(self, action: #selector(loginButtonTapped),
-                              for: .touchUpInside)
-        signUpButton.addTarget(self, action: #selector(signUpButtonTapped),
-                               for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(loginButtonTapped),  for: .touchUpInside)
+        signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
     }
+}
+// MARK: Actions
+extension LoginViewController {
     @objc private func loginButtonTapped() {
         AuthService.shared.login(email: emailTextField.text!,
                                  password: passwordTextField.text!) { (result) in
@@ -53,7 +53,9 @@ class LoginViewController: UIViewController {
                     FirestoreService.shared.getUserData(user: user) { (result) in
                         switch result {
                         case .success(let muser):
-                            self.present(MainTabBarController(), animated: true)
+                            let mainTabBar = MainTabBarController(currentUser: muser)
+                            mainTabBar.modalPresentationStyle = .fullScreen
+                            self.present(mainTabBar, animated: true)
                         case .failure(let error):
                             self.present(SetupProfileViewController(currentUser: user), animated: true)
                         }
@@ -76,26 +78,20 @@ class LoginViewController: UIViewController {
 extension LoginViewController {
     private func setupConstraints() {
         let loginWithView = ButtonFormView(label: loginWithLabel, button: googleButton)
-        let emailStackView = UIStackView(arrangedSubviews: [emailLabel,
-                                                            emailTextField],
-                                         axis: .vertical,
-                                         spacing: 0)
-        let passwordStackView = UIStackView(arrangedSubviews: [passwordLabel,
-                                                               passwordTextField],
-                                            axis: .vertical,
-                                            spacing: 0)
+        let emailStackView = UIStackView(arrangedSubviews: [emailLabel, emailTextField],
+                                         axis: .vertical, spacing: 0)
+        let passwordStackView = UIStackView(arrangedSubviews: [passwordLabel, passwordTextField],
+                                            axis: .vertical, spacing: 0)
         
         loginButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
         let stackView = UIStackView(arrangedSubviews: [loginWithView,
                                                        emailStackView,
                                                        passwordStackView,
                                                        loginButton],
-                                    axis: .vertical,
-                                    spacing: 40)
+                                    axis: .vertical, spacing: 40)
         
         signUpButton.contentHorizontalAlignment = .leading
-        let bottomStackView = UIStackView(arrangedSubviews: [needAnAccountLabel,
-                                                             signUpButton],
+        let bottomStackView = UIStackView(arrangedSubviews: [needAnAccountLabel,  signUpButton],
                                           axis: .horizontal,
                                           spacing: 10)
         bottomStackView.alignment = .firstBaseline

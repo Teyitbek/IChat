@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3034D6A3294D86CD00471DAC /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3034D6A2294D86CD00471DAC /* UIApplication+Extension.swift */; };
+		3034D6A5294D8B3700471DAC /* ListenerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3034D6A4294D8B3700471DAC /* ListenerService.swift */; };
+		3034D6A7294D98B200471DAC /* MMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3034D6A6294D98B200471DAC /* MMessage.swift */; };
+		3034D6A9294DB5A600471DAC /* WaitingChatNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3034D6A8294DB5A600471DAC /* WaitingChatNavigation.swift */; };
+		3034D6AB294ECA5E00471DAC /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3034D6AA294ECA5E00471DAC /* ChatsViewController.swift */; };
+		3034D6B129505CAE00471DAC /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3034D6B029505CAE00471DAC /* UIImage+Extension.swift */; };
 		306263F1294A2B6F0050D702 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306263F0294A2B6F0050D702 /* AppDelegate.swift */; };
 		306263F3294A2B6F0050D702 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306263F2294A2B6F0050D702 /* SceneDelegate.swift */; };
 		306263FA294A2B710050D702 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 306263F9294A2B710050D702 /* Assets.xcassets */; };
@@ -56,6 +62,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3034D6A2294D86CD00471DAC /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		3034D6A4294D8B3700471DAC /* ListenerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenerService.swift; sourceTree = "<group>"; };
+		3034D6A6294D98B200471DAC /* MMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMessage.swift; sourceTree = "<group>"; };
+		3034D6A8294DB5A600471DAC /* WaitingChatNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingChatNavigation.swift; sourceTree = "<group>"; };
+		3034D6AA294ECA5E00471DAC /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
+		3034D6B029505CAE00471DAC /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		306263ED294A2B6F0050D702 /* IChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		306263F0294A2B6F0050D702 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		306263F2294A2B6F0050D702 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -163,6 +175,7 @@
 			children = (
 				30626405294A2CAB0050D702 /* AuthServices.swift */,
 				3088B1F6294ADCD800553486 /* FirestoreService.swift */,
+				3034D6A4294D8B3700471DAC /* ListenerService.swift */,
 				30626407294A2CCC0050D702 /* Model */,
 			);
 			path = Services;
@@ -173,6 +186,7 @@
 			children = (
 				30626408294A2CE10050D702 /* MUser.swift */,
 				3062640A294A2D030050D702 /* MChat.swift */,
+				3034D6A6294D98B200471DAC /* MMessage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -185,6 +199,7 @@
 				30626411294A2D910050D702 /* PeopleViewController.swift */,
 				30626413294A2DBA0050D702 /* ProfileViewController.swift */,
 				30626415294A2DF10050D702 /* ChatRequestViewController.swift */,
+				3034D6AA294ECA5E00471DAC /* ChatsViewController.swift */,
 				30626417294A2E030050D702 /* Cell */,
 				3062641E294A2E860050D702 /* Header */,
 			);
@@ -225,6 +240,7 @@
 			children = (
 				3062642B294A30140050D702 /* SelfConfiguringCell.swift */,
 				3062642D294A30320050D702 /* AuthNavigationDelegate.swift */,
+				3034D6A8294DB5A600471DAC /* WaitingChatNavigation.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -247,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				3062643D294A315D0050D702 /* UIButton+Extension.swift */,
+				3034D6A2294D86CD00471DAC /* UIApplication+Extension.swift */,
 				3062643F294A31820050D702 /* UIViewController+Extension.swift */,
 				30626441294A31AB0050D702 /* UIView+Extension.swift */,
 				30626443294A31CA0050D702 /* UILabel+Extension.swift */,
@@ -255,6 +272,7 @@
 				30626449294A32330050D702 /* UIImageView+Extension.swift */,
 				3062644B294A32550050D702 /* UIStackView+Extension.swift */,
 				3062644D294A327E0050D702 /* UISegmentedControl+Extension.swift */,
+				3034D6B029505CAE00471DAC /* UIImage+Extension.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -402,8 +420,10 @@
 				3062642C294A30140050D702 /* SelfConfiguringCell.swift in Sources */,
 				30626416294A2DF10050D702 /* ChatRequestViewController.swift in Sources */,
 				3062641D294A2E710050D702 /* UserCell.swift in Sources */,
+				3034D6AB294ECA5E00471DAC /* ChatsViewController.swift in Sources */,
 				3062644E294A327E0050D702 /* UISegmentedControl+Extension.swift in Sources */,
 				30626440294A31820050D702 /* UIViewController+Extension.swift in Sources */,
+				3034D6B129505CAE00471DAC /* UIImage+Extension.swift in Sources */,
 				30626451294A32C10050D702 /* Validators.swift in Sources */,
 				3062644C294A32560050D702 /* UIStackView+Extension.swift in Sources */,
 				3062642E294A30320050D702 /* AuthNavigationDelegate.swift in Sources */,
@@ -413,7 +433,9 @@
 				3062640E294A2D3A0050D702 /* MainTabBarController.swift in Sources */,
 				3088B1F7294ADCD800553486 /* FirestoreService.swift in Sources */,
 				306263F1294A2B6F0050D702 /* AppDelegate.swift in Sources */,
+				3034D6A7294D98B200471DAC /* MMessage.swift in Sources */,
 				30626423294A2F440050D702 /* AuthViewController.swift in Sources */,
+				3034D6A3294D86CD00471DAC /* UIApplication+Extension.swift in Sources */,
 				30626409294A2CE10050D702 /* MUser.swift in Sources */,
 				30626437294A30E00050D702 /* OneLineTextField.swift in Sources */,
 				30626446294A31EF0050D702 /* UIFont+Extension.swift in Sources */,
@@ -422,6 +444,7 @@
 				3088B1F9294ADFE900553486 /* UserError.swift in Sources */,
 				3062643E294A315D0050D702 /* UIButton+Extension.swift in Sources */,
 				3062641B294A2E500050D702 /* WaitingChatCell.swift in Sources */,
+				3034D6A9294DB5A600471DAC /* WaitingChatNavigation.swift in Sources */,
 				30626425294A2F650050D702 /* SignUpViewController.swift in Sources */,
 				3062643B294A31230050D702 /* Bundle&Decodable.swift in Sources */,
 				30626433294A309D0050D702 /* InsertableTextField.swift in Sources */,
@@ -431,6 +454,7 @@
 				30626420294A2EB40050D702 /* SectionHeader.swift in Sources */,
 				30626431294A306B0050D702 /* AddPhotoView.swift in Sources */,
 				30626427294A2F890050D702 /* LoginViewController.swift in Sources */,
+				3034D6A5294D8B3700471DAC /* ListenerService.swift in Sources */,
 				30626419294A2E230050D702 /* ActiveChatCell.swift in Sources */,
 				30626439294A30FD0050D702 /* GradientView.swift in Sources */,
 				306263F3294A2B6F0050D702 /* SceneDelegate.swift in Sources */,

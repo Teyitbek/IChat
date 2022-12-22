@@ -31,10 +31,15 @@ class UserCell: UICollectionViewCell, SelfConfiguringCell {
         self.containerView.clipsToBounds = true
     }
     
+    override func prepareForReuse() {
+        userImageView.image = nil
+    }
+    
     func configure<U>(with value: U) where U : Hashable {
         guard let user: MUser = value as? MUser else { return }
-        userImageView.image = UIImage(named: user.avatarStringURL)
         userName.text = user.username
+        userImageView.image = UIImage(named: "person6")
+        // must be image from remote
     }
     
     private func setupConstraints() {
