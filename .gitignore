@@ -117,3 +117,4 @@ iOSInjectionProject/
 **/xcshareddata/WorkspaceSettings.xcsettings
 
 /.irb-history
+.DS_Store
