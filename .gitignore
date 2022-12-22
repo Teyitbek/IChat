@@ -118,3 +118,5 @@ iOSInjectionProject/
 
 /.irb-history
 .DS_Store
+*.xcuserdata
+
