@@ -6,5 +6,9 @@ target 'IChat' do
   use_frameworks!
 
   # Pods for IChat
+pod 'Firebase/Analytics'
+pod 'Firebase/Auth'
+pod 'Firebase/Firestore'
+pod 'MessageKit'
 
 end
