@@ -307,7 +307,6 @@
 				306263E9294A2B6F0050D702 /* Sources */,
 				306263EA294A2B6F0050D702 /* Frameworks */,
 				306263EB294A2B6F0050D702 /* Resources */,
-				18769518011FA29EDD7D7ED8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -368,23 +367,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		18769518011FA29EDD7D7ED8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-IChat/Pods-IChat-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-IChat/Pods-IChat-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IChat/Pods-IChat-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		BA80D2915DB29FEB1DD73D01 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
