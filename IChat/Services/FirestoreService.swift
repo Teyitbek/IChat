@@ -90,19 +90,22 @@ class FirestoreService {
                 let receiverChat = MChat(friendUsername: self.currentUser.username,
                                          lastMessageContent: message,
                                          friendId: self.currentUser.id)
-                
+                // MARK: add error handler
                 group.enter()
                 receiverActiveDocumentRef.setData(receiverChat.representation) { (error) in
+                    if error != nil {
+                        completion(.failure(error!))
+                    }
                     group.leave()
                 }
                 
                 group.enter()
                 receiverMessagesRef.addDocument(data: recieverMessage.representation) { (error) in
                     group.leave()
-//                    if let error = error {
-//                        completion(.failure(error))
-//                        return
-//                    }
+                    if error != nil {
+                        completion(.failure(error!))
+                        return
+                    }
                 }
                 
                 group.notify(queue: .main) {
